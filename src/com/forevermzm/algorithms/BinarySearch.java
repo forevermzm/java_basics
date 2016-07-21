@@ -5,8 +5,10 @@ public class BinarySearch {
         if (elements == null || elements.length == 0) {
             return -1;
         }
-        int left = 0;
-        int right = elements.length - 1;
+        return searchUtil(elements, target, 0, elements.length - 1);
+    }
+
+    private static int searchUtil(int[] elements, int target, int left, int right) {
         while (left <= right) {
             int mid = left + (right - left) / 2;
             if (elements[mid] > target) {
@@ -24,8 +26,10 @@ public class BinarySearch {
         if (elements == null || elements.length == 0) {
             return -1;
         }
-        int left = 0;
-        int right = elements.length - 1;
+        return searchFirstOccurrenceUtil(elements, target, 0, elements.length - 1);
+    }
+
+    private static int searchFirstOccurrenceUtil(int[] elements, int target, int left, int right) {
         while (left < right - 1) {
             int mid = left + (right - left) / 2;
             if (elements[mid] >= target) {
@@ -46,8 +50,10 @@ public class BinarySearch {
         if (elements == null || elements.length == 0) {
             return -1;
         }
-        int left = 0;
-        int right = elements.length - 1;
+        return searchLastOccurrenceUtil(elements, target, 0, elements.length - 1);
+    }
+
+    private static int searchLastOccurrenceUtil(int[] elements, int target, int left, int right) {
         while (left < right - 1) {
             int mid = left + (right - left) / 2;
             if (elements[mid] <= target) {
@@ -122,17 +128,7 @@ public class BinarySearch {
         } else {
             right = pivot;
         }
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (elements[mid] == target) {
-                return mid;
-            } else if (elements[mid] > target) {
-                right = mid - 1;
-            } else {
-                left = mid + 1;
-            }
-        }
-        return -1;
+        return searchUtil(elements, target, left, right);
     }
 
     static int findPivot(int[] elements, int left, int right) {
@@ -148,5 +144,18 @@ public class BinarySearch {
             }
         }
         return right;
+    }
+
+    public static int findRepeatedCount(int[] elements, int target) {
+        if (elements == null || elements.length == 0) {
+            return -1;
+        }
+        int leftMost = searchFirstOccurrenceUtil(elements, target, 0, elements.length - 1);
+        if (leftMost != -1) {
+            int rightMost = searchLastOccurrenceUtil(elements, target, leftMost, elements.length - 1);
+            return rightMost - leftMost + 1;
+        } else {
+            return 0;
+        }
     }
 }

@@ -117,4 +117,14 @@ public class BinarySearchTest {
         elements = new int[]{17, 19, 21, 23, 25, -8, -3, -1, 7, 8, 10, 12, 15};
         assertEquals(4, BinarySearch.findPivot(elements, 0, elements.length - 1));
     }
+
+    @Test
+    public void testFindRepeatedCount() {
+        int[] elements = {-3, -3, -3, -3, -3, -3, 6};
+
+        assertEquals(0, BinarySearch.findRepeatedCount(elements, -5));
+        assertEquals(6, BinarySearch.findRepeatedCount(elements, -3));
+        assertEquals(1, BinarySearch.findRepeatedCount(elements, 6));
+        assertEquals(0, BinarySearch.findRepeatedCount(elements, 10));
+    }
 }
