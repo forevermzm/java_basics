@@ -81,4 +81,40 @@ public class BinarySearchTest {
         assertEquals(-1, BinarySearch.searchUnknownSize(elements, 24, 2));
         assertEquals(-1, BinarySearch.searchUnknownSize(elements, 24, 13));
     }
+
+    @Test
+    public void testSearchWithPivot() {
+        int[] elements = {0, -1};
+
+        assertEquals(1, BinarySearch.searchWithPivot(elements, -1));
+        assertEquals(0, BinarySearch.searchWithPivot(elements, 0));
+
+        elements = new int[]{17, 19, 21, 23, 25, -8, -3, -1, 7, 8, 10, 12, 15};
+
+        assertEquals(-1, BinarySearch.searchWithPivot(elements, 16));
+        assertEquals(0, BinarySearch.searchWithPivot(elements, 17));
+        assertEquals(2, BinarySearch.searchWithPivot(elements, 21));
+        assertEquals(3, BinarySearch.searchWithPivot(elements, 23));
+    }
+
+    @Test
+    public void testFindPivot() {
+        int[] elements = {1};
+        assertEquals(0, BinarySearch.findPivot(elements, 0, elements.length - 1));
+
+        elements = new int[]{2, 1};
+        assertEquals(0, BinarySearch.findPivot(elements, 0, elements.length - 1));
+
+        elements = new int[]{2, 3, 1};
+        assertEquals(1, BinarySearch.findPivot(elements, 0, elements.length - 1));
+
+        elements = new int[]{2, 3, 4, 5, -5, -3, 1};
+        assertEquals(3, BinarySearch.findPivot(elements, 0, elements.length - 1));
+
+        elements = new int[]{2, 3, 4, 5, 1};
+        assertEquals(3, BinarySearch.findPivot(elements, 0, elements.length - 1));
+
+        elements = new int[]{17, 19, 21, 23, 25, -8, -3, -1, 7, 8, 10, 12, 15};
+        assertEquals(4, BinarySearch.findPivot(elements, 0, elements.length - 1));
+    }
 }

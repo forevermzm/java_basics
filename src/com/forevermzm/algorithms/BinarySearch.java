@@ -88,9 +88,6 @@ public class BinarySearch {
         if (elements == null || elements.length == 0) {
             return -1;
         }
-        if (elements[0] > target) {
-            return -1;
-        }
         int left = 0;
         int right = jump;
         while (elements.length > right
@@ -111,5 +108,45 @@ public class BinarySearch {
             }
         }
         return -1;
+    }
+
+    public static int searchWithPivot(int[] elements, int target) {
+        if (elements == null || elements.length == 0) {
+            return -1;
+        }
+        int left = 0;
+        int right = elements.length - 1;
+        int pivot = findPivot(elements, left, right);
+        if (target <= elements[right]) {
+            left = pivot + 1;
+        } else {
+            right = pivot;
+        }
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (elements[mid] == target) {
+                return mid;
+            } else if (elements[mid] > target) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return -1;
+    }
+
+    static int findPivot(int[] elements, int left, int right) {
+        if (elements.length == 1) {
+            return 0;
+        }
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (elements[mid] <= elements[right]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return right;
     }
 }
